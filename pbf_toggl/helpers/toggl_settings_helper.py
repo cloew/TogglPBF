@@ -1,4 +1,5 @@
 from toggl_settings_xml_helper import GetTogglXMLTree, SaveTogglXML
+from toggl_connection import TogglConnection
 
 from xml.etree.ElementTree import SubElement
 
@@ -7,39 +8,47 @@ def AddToken(token, name=None):
     if name is None:
         name = 'default'
         
-    tokensXML = GetTokensXML()
-    tokenElement = SubElement(tokensXML, 'token')
+    connectionsXML = GetConnectionsXML()
+    connectionXML = SubElement(connectionsXML, 'connection')
     
-    nameElement = SubElement(tokenElement, 'name')
+    nameElement = SubElement(connectionXML, 'name')
     nameElement.text = name
-    apiTokenElement = SubElement(tokenElement, 'api-token')
+    apiTokenElement = SubElement(connectionXML, 'api-token')
     apiTokenElement.text = token
     SaveTogglXML()
     
+def FindTogglConnection(connectionName=None):
+    """ Find the Toggl Connection for the given Connection Name """
+    connection = None
+    connectionXML = FindConnectionXML(connectionName)
+    if connectionXML is not None:
+        connection = TogglConnection(connectionXML)
+    return conenction
+    
 def GetAPIToken(connectionName=None):
     """ Return the API Token for the requested Connection """
-    tokenXML = FindTokenXML(connectionName)
-    return tokenXML.findtext('api-token')
+    connectionXML = FindConnectionXML(connectionName)
+    return connectionXML.findtext('api-token')
     
-def FindTokenXML(connectionName=None):
-    """ Find the requested Token XML """
+def FindConnectionXML(connectionName=None):
+    """ Find the requested Connection XML """
     if connectionName is None:
         connectionName = 'default'
         
-    tokensXML = GetTokensXML()
-    tokenElements = tokensXML.findall('token')
+    connectionsXML = GetConnectionsXML()
+    connectionElements = connectionsXML.findall('connection')
     
-    matchingTokens = [tokenElement for tokenElement in tokenElements if tokenElement.findtext('name') == connectionName]
+    matchingTokens = [connectionElement for connectionElement in connectionElements if connectionElement.findtext('name') == connectionName]
     if len(matchingTokens) == 0:
         return None
     else:
         return matchingTokens[0]
         
-def GetTokensXML():
-    """ Return the tokens xml """
+def GetConnectionsXML():
+    """ Return the connections xml """
     tree = GetTogglXMLTree()
-    tokensXML = tree.getroot().find('tokens')
-    if tokensXML is None:
-        tokensXML = SubElement(tree.getroot(), 'tokens')
+    connectionsXML = tree.getroot().find('connections')
+    if connectionsXML is None:
+        connectionsXML = SubElement(tree.getroot(), 'connections')
         
-    return tokensXML
+    return connectionsXML

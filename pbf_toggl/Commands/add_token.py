@@ -3,7 +3,7 @@ from pbf.Commands import command_manager
 import pbf_toggl.helpers.toggl_settings_helper as togglSettings
 
 class AddToken:
-    """ Represents COmmand to add api token to toggl settings """
+    """ Represents Command to add api token to toggl settings """
     category = "add"
     command = "token"
     description = "Adds the given token to the Toggl Settings"

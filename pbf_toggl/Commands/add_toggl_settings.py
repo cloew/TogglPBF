@@ -31,14 +31,14 @@ class AddTogglSettings:
             
     def addTogglSettings(self, pbfProject, projectName, togglConnection):
         """ Add Toggl Settings to the project XML """
-        tokenXML = togglSettings.FindTokenXML(togglConnection)
+        connection = togglSettings.FindTogglConnection(togglConnection)
         
-        if tokenXML is not None:
-            togglProject = FindProjectByName(projectName, apiToken=tokenXML.findtext('api-token'))
+        if connection is not None:
+            togglProject = FindProjectByName(projectName, apiToken=connection.token)
             
             togglElement = SubElement(pbfProject.projectXML, "toggl")
             connectionElement = SubElement(togglElement, "connection")
-            connectionElement.text = tokenXML.findtext('name')
+            connectionElement.text = connection.name
             projectIdElement = SubElement(togglElement, "project-id")
             projectIdElement.text = str(togglProject.id)
             
