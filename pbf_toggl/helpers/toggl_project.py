@@ -1,3 +1,4 @@
+import pbf_toggl.helpers.toggl_settings_helper as togglSettings
 import pytoggl
 
 class TogglProject:
@@ -16,7 +17,8 @@ class TogglProject:
     @property
     def apiToken(self):
         """ Return the Project Username """
-        return self.togglXML.find('api-token').text
+        connection = self.togglXML.findtext('connection')
+        return togglSettings.GetAPIToken(connection)
         
     @property
     def togglProject(self):
@@ -26,4 +28,4 @@ class TogglProject:
     @property
     def projectId(self):
         """ Return the Toggl Project Id """
-        return int(self.togglXML.find('project-id').text)
+        return int(self.togglXML.findtext('project-id'))
