@@ -4,6 +4,7 @@ from pbf.helpers.Project.project_xml_helper import SaveProjectXML
 from pbf.Commands import command_manager
 
 from pbf_toggl.helpers.toggl_helper import FindProjectByName
+import pbf_toggl.helpers.toggl_settings_helper as togglSettings
 
 from xml.etree.ElementTree import SubElement
 
@@ -12,26 +13,30 @@ class AddTogglSettings:
     category = "add"
     command = "toggl-settings"
     description = "Add Toggl settings to the current project"
-    minimumNumberOfArguments = 2
+    minimumNumberOfArguments = 1
     
     def run(self, args):
         """ Run the command """
         projectName = args[0]
-        apiToken = args[1]
-        pbfProject = GetParentProjectFromDirectory()
+        togglConnection = None
         
+        if len(args) > 1:
+            togglConnection = args[1]
+            
+        pbfProject = GetParentProjectFromDirectory()
         if pbfProject is None:
             print "No PBF project for current directory"
         else:
-            self.addTogglSettings(pbfProject, apiToken, projectName)
+            self.addTogglSettings(pbfProject, projectName, togglConnection)
             
-    def addTogglSettings(self, pbfProject, apiToken, projectName):
+    def addTogglSettings(self, pbfProject, projectName, togglConnection):
         """ Add Toggl Settings to the project XML """
+        apiToken = togglSettings.GetAPIToken(togglConnection)
         togglProject = FindProjectByName(projectName, apiToken=apiToken)
         
         togglElement = SubElement(pbfProject.projectXML, "toggl")
-        apiTokenElement = SubElement(togglElement, "api-token")
-        apiTokenElement.text = apiToken
+        connectionElement = SubElement(togglElement, "connection")
+        connectionElement.text = togglConnection
         projectIdElement = SubElement(togglElement, "project-id")
         projectIdElement.text = str(togglProject.id)
         
@@ -39,7 +44,7 @@ class AddTogglSettings:
     
     def help(self):
         """ Print Command usage """
-        print "Usage: pbf {category} {command} [Project Name] [Toggl API Token]".format(category=self.category, command=self.command)
-        print "Stores the Toggl Settings in the current project with the given API Token and Project Name"
+        print "Usage: pbf {category} {command} [Project Name] [Toggl Connection]".format(category=self.category, command=self.command)
+        print "Stores the Toggl Settings in the current project with the given Project Name from the default Toggl connection or the one specified"
     
 command_manager.RegisterCommand(AddTogglSettings)

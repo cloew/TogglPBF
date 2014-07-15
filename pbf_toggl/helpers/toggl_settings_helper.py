@@ -15,6 +15,25 @@ def AddToken(token, name=None):
     apiTokenElement = SubElement(tokenElement, 'api-token')
     apiTokenElement.text = token
     SaveTogglXML()
+    
+def GetAPIToken(connectionName=None):
+    """ Return the API Token for the requested Connection """
+    tokenXML = FindTokenXML(connectionName)
+    return tokenXML.findtext('api-token')
+    
+def FindTokenXML(connectionName=None):
+    """ Find the requested Token XML """
+    if connectionName is None:
+        connectionName = 'default'
+        
+    tokensXML = GetTokensXML()
+    tokenElements = tokensXML.findall('token')
+    
+    matchingTokens = [tokenElement for tokenElement in tokenElements if tokenElement.findtext('name') == connectionName]
+    if len(matchingTokens) == 0:
+        return None
+    else:
+        return matchingTokens[0]
         
 def GetTokensXML():
     """ Return the tokens xml """
