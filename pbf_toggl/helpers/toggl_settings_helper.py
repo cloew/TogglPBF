@@ -3,7 +3,7 @@ from toggl_connection import TogglConnection
 
 from xml.etree.ElementTree import SubElement
 
-def AddToken(token, name=None):
+def AddConnection(token, name=None):
     """ Add the given token to the Toggl settings """
     if name is None:
         name = 'default'
