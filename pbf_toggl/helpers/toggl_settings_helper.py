@@ -22,8 +22,8 @@ def FindTogglConnection(connectionName=None):
     connection = None
     connectionXML = FindConnectionXML(connectionName)
     if connectionXML is not None:
-        connection = TogglConnection(connectionXML)
-    return conenction
+        connection = TogglConnection(xml=connectionXML)
+    return connection
     
 def GetAPIToken(connectionName=None):
     """ Return the API Token for the requested Connection """

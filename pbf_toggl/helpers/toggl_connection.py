@@ -6,7 +6,7 @@ class TogglConnection:
         """ Initialize the Toggl Connection """
         if xml is not None:
             self.name = xml.findtext('name')
-            self.token = xml.findtext('token')
+            self.token = xml.findtext('api-token')
         else:
             self.name = name
             self.token = token
