@@ -7,15 +7,16 @@ class AddConnection:
     category = "add"
     command = "connection"
     description = "Creates a connection for the given token in the Toggl Settings"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('token', action='store', help='Toggl API Token')
+        parser.add_argument('name', action='store', default='default', help='Name for the new connection')
+    
+    def run(self, arguments):
         """ Run the command """
-        token = args[0]
-        name = None
-        
-        if len(args) > 1:
-            name = args[1]
+        token = arguments.token
+        name = arguments.name
             
         self.addConnection(token, name)
         

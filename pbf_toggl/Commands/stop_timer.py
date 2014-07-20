@@ -7,9 +7,12 @@ class StopTimerCommand:
     category = "stop"
     command = "timer"
     description = "Stop the current timer for Toggl"
-    minimumNumberOfArguments = 0
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        pass # No arguments
+    
+    def run(self, arguments):
         """ Run the command """
         self.stopTimer()
         

@@ -13,15 +13,16 @@ class AddTogglSettings:
     category = "add"
     command = "toggl-settings"
     description = "Add Toggl settings to the current project"
-    minimumNumberOfArguments = 1
     
-    def run(self, args):
+    def addArguments(self, parser):
+        """ Add arguments to the parser """
+        parser.add_argument('projectname', action='store', help='Toggl Project Name to connect to')
+        parser.add_argument('connection', action='store', default='default', help='Toggl Connection to connect to')
+    
+    def run(self, arguments):
         """ Run the command """
-        projectName = args[0]
-        togglConnection = None
-        
-        if len(args) > 1:
-            togglConnection = args[1]
+        projectName = arguments.projectname
+        togglConnection = arguments.connection
             
         pbfProject = GetParentProjectFromDirectory()
         if pbfProject is None:
