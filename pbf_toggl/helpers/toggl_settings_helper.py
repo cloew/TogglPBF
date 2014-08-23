@@ -3,6 +3,8 @@ from toggl_connection import TogglConnection
 
 from xml.etree.ElementTree import SubElement
 
+import pytoggl
+
 def AddConnection(token, name=None):
     """ Add the given token to the Toggl settings """
     if name is None:
@@ -24,6 +26,10 @@ def FindTogglConnection(connectionName=None):
     if connectionXML is not None:
         connection = TogglConnection(xml=connectionXML)
     return connection
+    
+def GetTogglAPI(connectionName=None):
+    """ Return the Toggl API fro the given connection """
+    return pytoggl.TogglAPI(apiToken=GetAPIToken(connectionName))
     
 def GetAPIToken(connectionName=None):
     """ Return the API Token for the requested Connection """
