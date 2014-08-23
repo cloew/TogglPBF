@@ -14,7 +14,7 @@ class NewTogglProject:
     def addArguments(self, parser):
         """ Add arguments to the parser """
         parser.add_argument('projectname', action='store', help='Toggl Project Name to connect to')
-        parser.add_argument('connection', action='store', default='default', help='Toggl Connection to connect to')
+        parser.add_argument('connection', action='store', nargs='?', default='default', help='Toggl Connection to connect to')
     
     def run(self, arguments):
         """ Run the command """
