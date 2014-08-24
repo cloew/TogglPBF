@@ -15,7 +15,7 @@ class NewTogglProject:
     def addArguments(self, parser):
         """ Add arguments to the parser """
         parser.add_argument('projectname', action='store', help='Toggl Project Name to connect to')
-        parser.add_argument('connection', action='store', nargs='?', default='default', help='Toggl Connection to connect to')
+        parser.add_argument('connection', action='store', nargs='?', default=None, help='Toggl Connection to connect to')
         parser.add_argument('-s', '--store', action='store_true', help='Store this Toggl Project as the connection for this PBF Project')
         parser.add_argument('-w', '--workspace', action='store', help='The Workspace to add the project to')
     
