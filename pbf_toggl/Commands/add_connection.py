@@ -11,7 +11,7 @@ class AddConnection:
     def addArguments(self, parser):
         """ Add arguments to the parser """
         parser.add_argument('token', action='store', help='Toggl API Token')
-        parser.add_argument('name', action='store', default='default', help='Name for the new connection')
+        parser.add_argument('name', action='store', nargs='?', default='default', help='Name for the new connection')
     
     def run(self, arguments):
         """ Run the command """
