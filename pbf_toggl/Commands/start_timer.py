@@ -23,7 +23,7 @@ class StartTimerCommand:
     def startTimer(self, description):
         """ Start the Toggl Timer """
         pbfProject = GetCurrentTogglProject()
-        timeEntry = pytoggl.TimeEntry(description=description, pid=pbfProject.togglProject.id)
+        timeEntry = pytoggl.TimeEntry(description=description, pid=pbfProject.togglProject.id, created_with="TogglPBF")
         pbfProject.togglAPI.timer.startTimer(timeEntry)
     
     def help(self):
