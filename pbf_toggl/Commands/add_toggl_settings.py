@@ -1,7 +1,6 @@
 from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
 from pbf.helpers.Project.project_xml_helper import SaveProjectXML
 
-from pbf.Commands import command_manager
 
 from pbf_toggl.helpers.toggl_helper import FindProjectByName
 import pbf_toggl.helpers.toggl_settings_helper as togglSettings
@@ -10,9 +9,6 @@ from xml.etree.ElementTree import SubElement
 
 class AddTogglSettings:
     """ Represents command to add Toggl Settings to the current Project """
-    category = "add"
-    command = "toggl-settings"
-    description = "Add Toggl settings to the current project"
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -46,10 +42,3 @@ class AddTogglSettings:
             SaveProjectXML()
         else:
             print "No Toggl Connection:", togglConnection
-    
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {category} {command} [Project Name] [Toggl Connection]".format(category=self.category, command=self.command)
-        print "Stores the Toggl Settings in the current project with the given Project Name from the default Toggl connection or the one specified"
-    
-command_manager.RegisterCommand(AddTogglSettings)

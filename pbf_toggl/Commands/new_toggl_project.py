@@ -1,4 +1,3 @@
-from pbf.Commands import command_manager
 from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
 from pbf_toggl.Commands.add_toggl_settings import AddTogglSettings
 
@@ -8,9 +7,6 @@ import pytoggl
 
 class NewTogglProject:
     """ Command to create a New Toggl Project """
-    category = "new"
-    command = "toggl-project"
-    description = "Create a new Toggl Project"
                           
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -56,10 +52,3 @@ class NewTogglProject:
         """ Store the Project Settings """
         addTogglSettings = AddTogglSettings()
         addTogglSettings.addTogglSettings(pbfProject, projectName, togglConnection)
-    
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {category} {command}".format(category=self.category, command=self.command) # ADD ADITIONAL PACKAGE ARGUMENTS
-        print "" # ADD DETAILED DESCRIPTION 
-    
-command_manager.RegisterCommand(NewTogglProject)

@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='pbf_toggl',
-      version='.1',
+      version='.2',
       description="Programmer's Best Friend Utility Extension for Toggl",
       author='Chris Loew',
       author_email='cloew123@gmail.com',
