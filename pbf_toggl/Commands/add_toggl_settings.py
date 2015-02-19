@@ -1,5 +1,5 @@
-from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
-from pbf.helpers.Project.project_xml_helper import SaveProjectXML
+from pbf_project.helpers.project_helper import GetParentProjectFromDirectory
+from pbf_project.helpers.project_xml_helper import SaveProjectXML
 
 
 from pbf_toggl.helpers.toggl_helper import FindProjectByName

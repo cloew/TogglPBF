@@ -1,4 +1,4 @@
-from pbf.helpers.Project.project_helper import GetParentProjectFromDirectory
+from pbf_project.helpers.project_helper import GetParentProjectFromDirectory
 from pbf_toggl.Commands.add_toggl_settings import AddTogglSettings
 
 import pbf_toggl.helpers.toggl_settings_helper as togglSettings

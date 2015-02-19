@@ -1,4 +1,3 @@
-
 from pbf_toggl.helpers.toggl_project_helper import GetCurrentTogglProject
 
 class StopTimerCommand:

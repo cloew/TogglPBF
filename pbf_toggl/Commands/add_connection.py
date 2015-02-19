@@ -1,4 +1,3 @@
-
 import pbf_toggl.helpers.toggl_settings_helper as togglSettings
 
 class AddConnection:
